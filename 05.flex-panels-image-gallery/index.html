@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Flex Panels Image Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="main.js"></script>
+    <style>
+        html {
+            background: burlywood;
+            font-size: 20px;
+            font-weight: 200;
+        }
+        body {
+            margin: 0;
+            color: rgb(245, 245, 245);
+        }
+        .panels {
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+        .panel {
+            background: #b81a4a;
+            text-align: center;
+            box-shadow: inset 0 0 0 5px rgb(255, 255, 255, 0.1);
+            flex: 1;
+            background-size: cover;
+            background-position: center;
+            transition: 
+                font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+                flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+                backgroud 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel.open {
+            flex: 3;
+            font-size: 2em;
+        }
+
+        .panel > * {
+            margin: 0;
+            width: 100%;
+            flex: 1 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s;
+        }
+
+        .panel > *:first-child {
+            transform: translateY(-100%);
+        }
+        .panel.open-active > *:first-child {
+            transform: translateY(0);
+            color: rgb(247, 242, 242);
+        }
+
+        .panel > *:last-child {
+            transform: translateY(100%);
+        }
+        .panel.open-active > *:last-child {
+            transform: translateY(0);
+            color: rgb(247, 242, 242);
+        }
+
+        .panel p {
+            text-transform: uppercase;
+            font-size: 2em;
+        }
+        
+        .panel p:nth-child(2) {
+            font-size: 4em;
+        }
+
+        .panel1 {
+            background-image: url('https://source.unsplash.com/4ydjTMLKdR4/1500x1500');
+        }
+        .panel2 {
+            background-image: url('https://source.unsplash.com/PC_lbSSxCZE/1500x1500');
+        }
+        .panel3 {
+            background-image: url('https://source.unsplash.com/3ESQPfrTV3o/1500x1500');
+        }
+        .panel4 {
+            background-image: url('https://source.unsplash.com/_AdUs32i0jc/1500x1500');
+        }
+        .panel5 {
+            background-image: url('https://source.unsplash.com/verEqQEUuzk/1500x1500');
+        }
+    </style>
+</head>
+<body>
+    <div class="panels">
+        <div class="panel panel1">
+            <p>Hey</p>
+            <p>Let's</p>
+            <p>Dance</p>
+        </div>
+        <div class="panel panel2">
+            <p>Give</p>
+            <p>Take</p>
+            <p>Receive</p>
+        </div>
+        <div class="panel panel3">
+            <p>Experience</p>
+            <p>It</p>
+            <p>Today</p>
+        </div>
+        <div class="panel panel4">
+            <p>Give</p>
+            <p>All</p>
+            <p>You Can</p>
+        </div>
+        <div class="panel panel5">
+            <p>Life</p>
+            <p>In</p>
+            <p>Motion</p>
+        </div>
+    </div>
+    <script>
+        var panels = document.querySelectorAll('.panel');
+        function toogleOpen() {
+            this.classList.toggle('open');
+        }
+
+        function toogleActive(e) {
+            if(e.propertyName.includes('flex')) {
+                this.classList.toggle('open-active');
+            }
+        }
+
+        panels.forEach(panel => panel.addEventListener('click', toogleOpen));
+        panels.forEach(panel => panel.addEventListener('transitionend', toogleActive));
+    </script>
+</body>
+</html>
